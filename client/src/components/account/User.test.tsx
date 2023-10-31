@@ -2,6 +2,12 @@ import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import User from './User';
 
+const data = {
+    name: "John",
+    age: 27,
+    address: '123 Main Street'
+}
+
 describe('Login test cases', () => {
     // using get by function
     it('get by role', () => {
@@ -124,6 +130,13 @@ describe('Login test cases', () => {
         const result = await screen.findByAltText('Demi Img');
 
         expect(result).toBeInTheDocument();
+    });
+
+    it('should render the object data', async () => {
+        Object.values(data).forEach(async (key) => {
+            const result = await screen.findByText(key);
+            expect(result).toBeInTheDocument();
+        });
     });
 
 });
